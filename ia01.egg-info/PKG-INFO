@@ -1,0 +1,102 @@
+Metadata-Version: 2.4
+Name: ia01
+Version: 1.0
+Summary: TD du cours CSC_3IA01_TA
+Author: <Philippe Xu>
+Author-email: philippe.xu@ensta-paris.fr
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# 🧠 Health Problem Prediction – AI01 Project
+
+## 📋 Project Overview
+This project aims to develop a **supervised machine learning model** capable of predicting an individual’s **health problem level** (`None`, `Low`, `Moderate`) based on various **health and lifestyle features**.
+
+The entire pipeline — from **data preprocessing** to **final prediction generation** — was fully implemented in **Python**, using only the **custom modules provided in the AI01 course** (`ia01.utils`, `ia01.arbre`, etc.), without relying on external libraries such as scikit-learn.
+
+---
+
+## ⚙️ Key Features
+- **Data Preprocessing**
+  - Missing value imputation (`age` replaced with median, constant value for `country`, alternating genders for missing `sex` entries).
+  - Numerical encoding (Label Encoding) for ordinal and binary attributes.
+  - Feature selection and removal of redundant or low-informative columns (`country`, `profession`, `cafe_verre`, `sommeil_duree`).
+
+- **Class Imbalance Handling**
+  - The rare `Severe` class (<1% of samples) was merged with `Moderate` to create a more stable 3-class classification problem.
+
+- **Model Selection**
+  - Comparison between **Decision Tree** and **k-Nearest Neighbors (k-NN)** models.
+  - **5-fold Cross-Validation** for robust model evaluation.
+  - **Macro F1-Score** used as the main performance metric to ensure balanced evaluation across all classes.
+
+- **Final Training and Prediction**
+  - Optimal Decision Tree depth determined automatically (`max_depth = 3`).
+  - Same preprocessing pipeline applied to test data (`X_test`).
+  - Generation of final submission file (`y_test.csv`).
+
+---
+
+## 📈 Results & Performance
+- **Final Model:** Decision Tree (depth = 3)
+- **Performance Metric:** Best Macro F1-Score from cross-validation
+- **Comparison:** k-NN showed higher error (~15%), while the Decision Tree achieved significantly better results
+
+---
+
+## 🧩 Repository Structure
+```
+📂 health_problem_prediction/
+│
+├── data/
+│   ├── X_train.csv
+│   ├── y_train.csv
+│   └── X_test.csv
+│
+├── src/
+│   ├── preprocess.py         # Data preprocessing & encoding
+│   ├── model_selection.py    # Cross-validation & model selection
+│   ├── train_predict.py      # Final training & predictions
+│   └── utils/                # Helper functions (ia01.* modules)
+│
+├── results/
+│   └── y_test.csv            # Final submission file
+│
+├── Rapport_Projet_IA.pdf     # Full project report (French)
+└── README.md                 # This file
+```
+
+---
+
+## 🧪 Technologies Used
+- **Language:** Python 3
+- **Libraries:** Custom AI01 modules only (`ia01.utils`, `ia01.arbre`)
+- **Models:** Decision Tree, k-Nearest Neighbors (k-NN)
+- **Metrics:** Macro F1-Score, Error Rate
+
+---
+
+## 🚀 How to Run
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/health_problem_prediction.git
+   cd health_problem_prediction
+   ```
+
+2. Run the full training & prediction pipeline:
+   ```bash
+   python src/train_predict.py
+   ```
+
+3. Final predictions will be saved to:
+   ```
+   results/y_test.csv
+   ```
+
+---
+
+## 👨‍💻 Author
+**Mohamed Amine Saidane**  
+AI01 Project – October 2025  
+University of Technology
